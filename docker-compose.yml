@@ -9,8 +9,6 @@ services:
     network_mode: "host"
     environment:
       - DISPLAY
-      - MAKEFLAGS="-j10"
-      - MIXINS="debug ccache"
     logging:
       driver: "journald"
     stdin_open: true
