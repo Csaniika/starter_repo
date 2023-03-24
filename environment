@@ -25,7 +25,6 @@ chpwd
 export PS1='🚓 \[\e[1;34m\]$HPWD\[\e[m\] '
 
 ## Set environment variables
-export ROS_DOMAIN_ID=5
 export GAZEBO_MASTER_IP=10.42.0.121
 export GAZEBO_MASTER_URI=$GAZEBO_MASTER_IP:11345
 export TURTLEBOT3_MODEL=waffle
