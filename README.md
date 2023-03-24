@@ -37,8 +37,10 @@ To change environment variables or setup, modify that file.
 
 ROS commands can also be run inside the container. Run the stack with
 ```bash
-ros2 launch gazebo_rotating_lidar_plugin minimal_bringup.launch.py
+ros2 launch gazebo_rotating_lidar_plugin full_bringup.launch.py
 ```
+
+Give a 2D Pose Estimate via Rviz2 to have a starting position for the robot.
 
 ## Contributing
 To contribute, fork this repo and open a pull request.
