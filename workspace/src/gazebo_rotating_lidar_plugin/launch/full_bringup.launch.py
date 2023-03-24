@@ -32,6 +32,8 @@ def generate_launch_description() -> LaunchDescription:
             launch_arguments={
                 'world': os.path.join(
                     package_dir('gazebo_rotating_lidar_plugin'),
-                    'worlds', 'waffle.model')}.items()),
+                    'worlds', 'waffle.model'),
+                'headless': 'False'
+            }.items()),
 
     ])
