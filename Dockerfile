@@ -57,8 +57,10 @@ RUN useradd ubuntu --create-home --shell /bin/bash && \
     usermod -aG sudo ubuntu
 
 # Clone gazebo models
-RUN git clone https://github.com/osrf/gazebo_models.git && \
-    mv gazebo_models/* /usr/share/gazebo-11/models || true
+USER ubuntu
+RUN git clone https://github.com/osrf/gazebo_models.git /home/ubuntu/gazebo_models
+USER root
+RUN mv /home/ubuntu/gazebo_models/* /usr/share/gazebo-11/models || true
 
 # Install system dependencies with caching apt and pip package lists
 COPY apt-dependencies.txt apt-dependencies.txt
