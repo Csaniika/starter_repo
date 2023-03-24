@@ -30,19 +30,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 # E: Failed to fetch http://packages.ros.org/ros2/ubuntu/dists/focal/InRelease  403  Forbidden [IP: 172.17.0.1 8000]
 # E: The repository 'http://packages.ros.org/ros2/ubuntu focal InRelease' is not signed.
 
-# REMOVEME: Fix OpenGL black screen rendering issue
+# REMOVEME: packages need to be upgraded from kisak-mesa repo
+# libegl-mesa0 libgbm1 libgl1-mesa-dev
+# libgl1-mesa-dri libglapi-mesa libglx-mesa0 libllvm15
 RUN \
     --mount=type=cache,target=/var/cache/apt,mode=0777,sharing=locked \
     --mount=type=cache,target=/root/.cache/pip,mode=0777,sharing=locked \
-    apt update && apt install -y --allow-downgrades \
-    libgl1-mesa-dri=22.0.1-1ubuntu2 \
-    libglx-mesa0=22.0.1-1ubuntu2 \
-    libgl1-mesa-glx=22.0.1-1ubuntu2 \
-    libglapi-mesa=22.0.1-1ubuntu2 \
-    libgbm1=22.0.1-1ubuntu2 \
-    libegl-mesa0=22.0.1-1ubuntu2 \
-    libgl1-mesa-dri=22.0.1-1ubuntu2 \
-    libglx-mesa0=22.0.1-1ubuntu2
+    apt update && apt install -y \
+        software-properties-common && \
+    add-apt-repository ppa:kisak/kisak-mesa && \
+    apt update && apt upgrade -y \
+        libegl-mesa0 \
+        libgbm1 \
+        libgl1-mesa-dev \
+        libgl1-mesa-dri \
+        libglapi-mesa \
+        libglx-mesa0 \
+        libllvm15
 
 # Set root password
 RUN echo "root:pass"|chpasswd
