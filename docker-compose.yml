@@ -1,0 +1,24 @@
+version: '2.4'
+
+services:
+  starter_repo:
+    image: localhost:5000/starter_repo
+    build:
+      context: .
+    container_name: starter_repo
+    network_mode: "host"
+    environment:
+      - DISPLAY
+      - MAKEFLAGS="-j10"
+      - MIXINS="debug ccache"
+    logging:
+      driver: "journald"
+    stdin_open: true
+    tty: true
+    stop_signal: SIGINT
+    privileged: true
+    volumes:
+      - .:/home/ubuntu/starter_repo
+      - ~/.gitconfig:/home/ubuntu/.gitconfig
+      - ~/.ssh:/home/ubuntu/.ssh
+      - ~/.bash_history:/home/ubuntu/.bash_history

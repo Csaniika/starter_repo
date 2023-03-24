@@ -1,0 +1,37 @@
+#! /bin/bash
+
+## Source ros workspspaces
+source /ros_entrypoint.sh
+source /opt/ros/$ROS_DISTRO/setup.bash
+source /home/ubuntu/starter_repo/workspace/install/setup.bash
+
+## Set prompt
+cd () { builtin cd "$@" && chpwd; }
+pushd () { builtin pushd "$@" && chpwd; }
+popd () { builtin popd "$@" && chpwd; }
+chpwd () {
+  case $PWD in
+    $HOME) HPWD="~";;
+    $HOME/*/*) HPWD="${PWD#"${PWD%/*/*}/"}";;
+    $HOME/*) HPWD="~/${PWD##*/}";;
+    /*/*/*) HPWD="${PWD#"${PWD%/*/*}/"}";;
+    *) HPWD="$PWD";;
+  esac
+}
+chpwd
+export PS1='🚓 \[\e[1;34m\]$HPWD\[\e[m\] '
+
+## Set environment variables
+export ROS_DOMAIN_ID=5
+export GAZEBO_MASTER_IP=10.42.0.121
+export GAZEBO_MASTER_URI=$GAZEBO_MASTER_IP:11345
+export TURTLEBOT3_MODEL=waffle
+export MAKEFLAGS="-j8"
+export MIXINS="debug ccache"
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export GAZEBO_MASTER_IP=127.0.0.1
+export GAZEBO_MASTER_URI=127.0.0.1:11345
+export GAZEBO_MODEL_PATH="/usr/share/gazebo-11/models:/opt/ros/humble/share/turtlebot3_gazebo/models:/home/ubuntu/starter_repo/workspace/src/turtlebot3_simulations/turtlebot3_gazebo/models"
+export GAZEBO_RESOURCE_PATH="/usr/share/gazebo-11:/opt/ros/humble/share/turtlebot3_gazebo/models:/home/ubuntu/starter_repo/workspace/src/turtlebot3_simulations/turtlebot3_gazebo/models"
+
+exec "$@"
