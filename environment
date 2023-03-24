@@ -3,7 +3,10 @@
 ## Source ros workspspaces
 source /ros_entrypoint.sh
 source /opt/ros/$ROS_DISTRO/setup.bash
-source /home/ubuntu/starter_repo/workspace/install/setup.bash
+WORKSPACE_SETUP=/home/ubuntu/starter_repo/workspace/install/setup.bash
+if [ -f $WORKSPACE_SETUP ]; then
+  source $WORKSPACE_SETUP
+fi
 
 ## Set prompt
 cd () { builtin cd "$@" && chpwd; }
